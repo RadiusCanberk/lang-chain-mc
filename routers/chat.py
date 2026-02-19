@@ -29,7 +29,6 @@ REASONING_INSTRUCTION = (
 )
 
 
-
 @router.get("/history", response_model=ChatHistoryResponse)
 async def get_history(user_id: str, chat_id: str):
     """

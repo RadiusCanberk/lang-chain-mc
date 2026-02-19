@@ -1,9 +1,9 @@
 {
   "dependencies": ["."],
   "graphs": {
-    "agent": "/home/canberk/Desktop/workspace/agentic_workplace/lang-chain-mc/agents/agent.py:agent_executor",
-    "researcher": "/home/canberk/Desktop/workspace/agentic_workplace/lang-chain-mc/agents/agent.py:writer_executor_agent",
-    "dynamic_agent": "/home/canberk/Desktop/workspace/agentic_workplace/lang-chain-mc/agents/agent.py:dynamic_agent_executor",
+    "agent": "agents/agent.py:agent_executor",
+    "researcher": "agents/agent.py:writer_executor_agent",
+    "dynamic_agent": "agents/agent.py:dynamic_agent_executor",
     "file_creator": "agents/file_agents.py:file_creation_agent_executor",
     "file_editor": "agents/file_agents.py:file_editing_agent_executor"
   },

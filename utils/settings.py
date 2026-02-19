@@ -42,3 +42,4 @@ SANDBOX_NETWORK_DISABLED = os.getenv("SANDBOX_NETWORK_DISABLED", "true").lower()
 # Workspace
 WORKSPACE_DIR = Path(__file__).parent.parent / "workspace"
 WORKSPACE_DIR.mkdir(exist_ok=True)
+API_BASE_URL = os.getenv("API_BASE_URL", "http://localhost:8000")

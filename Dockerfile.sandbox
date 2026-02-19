@@ -1,0 +1,31 @@
+# Dockerfile.sandbox
+FROM python:3.12-slim
+
+# Güvenlik: non-root user
+RUN useradd -m -u 1000 sandboxuser && \
+    mkdir -p /workspace && \
+    chown sandboxuser:sandboxuser /workspace
+
+# Gerekli paketleri kur
+RUN pip install --no-cache-dir \
+    numpy \
+    pandas \
+    matplotlib \
+    seaborn \
+    scipy \
+    pillow \
+    pyyaml \
+    requests
+
+# Çalışma dizini
+WORKDIR /workspace
+
+# Non-root user olarak çalış
+USER sandboxuser
+
+# Network ve hassas komutları engelle
+ENV PYTHONUNBUFFERED=1
+ENV NO_PROXY=*
+
+# Script çalıştırma komutu
+CMD ["python", "/tmp/script.py"]

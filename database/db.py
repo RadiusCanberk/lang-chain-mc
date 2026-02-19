@@ -13,9 +13,9 @@ from database.models.chat_models import Chat
 from utils.settings import DATABASE_URL
 
 
-def _connect_args(db_url: str) -> dict:
+def _connect_args(db_url: Optional[str]) -> dict:
     """Get connection arguments based on database type"""
-    if db_url.startswith("sqlite"):
+    if db_url and db_url.startswith("sqlite"):
         return {"check_same_thread": False}
     return {}
 
@@ -27,13 +27,22 @@ class DatabaseManager:
     Handles both connection management and repository-level operations.
     """
 
-    def __init__(self, database_url: str = DATABASE_URL):
+    def __init__(self, database_url: Optional[str] = None):
         """
         Initialize database manager.
 
         Args:
-            database_url: Database connection URL
+            database_url: Database connection URL (defaults to DATABASE_URL from settings, or SQLite if not set)
         """
+        # Use provided URL, or DATABASE_URL from settings, or default to SQLite
+        if database_url is None:
+            database_url = DATABASE_URL
+        
+        # If still None, use default SQLite database
+        if database_url is None:
+            db_path = Path(__file__).parent.parent / "database.db"
+            database_url = f"sqlite:///{db_path}"
+        
         self.database_url = database_url
         self.engine = create_engine(
             database_url,

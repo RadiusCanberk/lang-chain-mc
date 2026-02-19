@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from dotenv import load_dotenv
 
 from database.db import init_db
-from routers import chat
+from routers import chat, file_agents
 import uvicorn
 import logging
 from contextlib import asynccontextmanager
@@ -43,6 +43,7 @@ app = FastAPI(
 )
 
 app.include_router(chat.router, prefix="/agent", tags=["Agent"])
+app.include_router(file_agents.router, prefix="/file-agents", tags=["File Agents"])
 
 @app.get("/")
 def root():
